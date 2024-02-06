@@ -17,7 +17,7 @@ func main() {
 	config, err := configs.LoadConfig(".")
 	ctx := context.Background()
 	if err != nil {
-		panic(err)
+		panic("linha 20 " + err.Error())
 	}
 	rd_client := redis.NewClient(&redis.Options{
 		Addr:     config.RedisSrc,
@@ -27,7 +27,7 @@ func main() {
 	defer rd_client.Close()
 	pong, err := rd_client.Ping(ctx).Result()
 	if err != nil {
-		panic(err.Error())
+		panic("linha 30 " + err.Error())
 	}
 	fmt.Println("Conexão ao Redis estabelecida:", pong)
 	rds := entity.NewRedisStorage(rd_client)
